@@ -1,4 +1,4 @@
-from resources import print_board
+from resources import print_board, winner_check
 
 board = {'1':'1', '2':'2', '3':'3', '4':'4', '5':'5', '6':'6', '7':'7', '8':'8', '9':'9'}
 winner = False
@@ -10,7 +10,7 @@ for n in range(9):
         letter = "X"
     else: letter = "O"
     print_board(board)
-    while True:
+    while winner == False:
         move = input("It's player " + letter + "\'s turn. What space do you want to choose?")
         if board[str(move)] != 'X' and board[str(move)] != 'O':
             board[move] = letter
@@ -19,8 +19,8 @@ for n in range(9):
             print("That space is already filled, choose another space.")
             continue
     player +=1
-    if board['1'] == board['2'] == board['3']:
-        print('Player ' + str(board['1']) + ' is the winner!')
+    if winner_check(board) == True:
+        print("Game Over")
         break
 print_board(board)
 
