@@ -26,6 +26,10 @@ def winner_check(board):
         won = str(board['1'])
         print('Player ' + won + ' is the winner!')
         return True
+    elif board['2'] == board['5'] == board['8']:
+        won = str(board['5'])
+        print('Player ' + won + ' is the winner!')
+        return True
     elif board['3'] == board['6'] == board['9']:
         won = str(board['3'])
         print('Player ' + won + ' is the winner!')
@@ -39,4 +43,3 @@ def winner_check(board):
         print('Player ' + won + ' is the winner!')
         return True
     else: return False
-    
