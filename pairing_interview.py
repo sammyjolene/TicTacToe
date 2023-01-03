@@ -1,4 +1,8 @@
+import random
 board = {'1':'1', '2':'2', '3':'3', '4':'4', '5':'5', '6':'6', '7':'7', '8':'8', '9':'9'}
+xboard = {'1':'X', '2':'O', '3':'3', '4':'X', '5':'O', '6':'6', '7':'X', '8':'8', '9':'9'}
+Oboard = {'1':'X', '2':'O', '3':'3', '4':'X', '5':'O', '6':'6', '7':'O', '8':'O', '9':'9'}
+tie = {'1':'O', '2':'X', '3':'X', '4':'X', '5':'O', '6':'O', '7':'O', '8':'X', '9':'X'}
 winner = False
 
 #Print the board in Tic Tac Toe grid
@@ -8,6 +12,18 @@ def print_board(board):
     print(board['4'] + " | " + board['5'] + " | " + board['6'])
     print("- - - - - ")
     print(board['7'] + " | " + board['8'] + " | " + board['9'])
+
+#Available Moves Check
+
+def move_options(board):
+    available_moves = []
+    for key in board:
+        if board[key] != "X" and board[key] != "O":
+            available_moves.append(key)
+    return available_moves
+
+#print(move_options(xboard))
+#print(move_options(Oboard))
 
 #Function to check if there is a winner
 def winner_check(board):
@@ -55,14 +71,22 @@ for n in range(9):
     else: 
       letter = "O"
     print_board(board)
+    #my turn
     while winner == False:
-        move = input("It's player " + letter + "\'s turn. What space do you want to choose?")
-        if board[str(move)] != 'X' and board[str(move)] != 'O':
+        if letter == "X":
+            move = input("It's player " + letter + "\'s turn. What space do you want to choose?")
+            if board[str(move)] != 'X' and board[str(move)] != 'O':
+                board[move] = letter
+                break
+            else:
+                print("That space is already filled, choose another space.")
+                continue
+        else:
+            available_moves = move_options(board)
+            move = random.choice(available_moves)
             board[move] = letter
             break
-        else:
-            print("That space is already filled, choose another space.")
-            continue
+    #computer turn
     player +=1
     if winner_check(board) == True:
         print("Game Over")
